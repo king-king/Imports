@@ -26,16 +26,24 @@
     function filterImports( str ) {
         var ss = [].concat( str.match( /imports((a-z|A-Z|"|.)*);/g ) );
         // 得到当前脚本的所有引用的脚本
-        var index = 0;
-        while ( ss[index] ) {
-            loadScript( getBetween( ss[index], "\"", "\"" ), function ( script ) {
-                filterImports( script.text );
-            } );
-            index += 1;
+
+        function load( index ) {
+            if ( ss[index] ) {
+                loadScript( getBetween( ss[index], "\"", "\"" ), function ( script ) {
+                    filterImports( script.text );
+                    load( ++index )
+                } );
+            }
         }
+
+        load( 0 );
     }
 
     function main( func ) {
+        filterImports( func.toString() );
+    }
+
+    function Package( func ) {
         filterImports( func.toString() );
     }
 
@@ -44,6 +52,7 @@
     };
 
     window.main = main;
+    window.Package = Package;
     window.imports = imports;
 
 })();
