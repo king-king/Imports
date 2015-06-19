@@ -1,0 +1,9 @@
+17:14 2015/6/19
+下午突然意识到，imports的路径可以不必采用相对于html的路径，而是采用引用-被引用二者之间的相对路径。
+
+例如有这样的引用关系：index.html-->a.js-->b.js
+文件之间的层次关系如下：\view\index.html
+                     \script\a.js
+                            \b.js
+那么在index.html中引用a.js应该这么写：imports("../script/a.js"),在a.js中引用b.js则应该这么写
+imports("a.js")
