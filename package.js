@@ -3,16 +3,16 @@
  */
 (function () {
 
-    var scripts = {};
 
-    var curScript = null;
+    var scripts = [];
+
 
     function loadScript( src, done ) {
         var script = document.createElement( "script" );
         script.src = src;
         document.head.appendChild( script );
         script.onload = function () {
-            done( script );
+            done();
             script.onload = null;
         }
     }
@@ -23,33 +23,52 @@
         return str.substring( s, str.indexOf( end ) );
     }
 
-    function filterImports( str ) {
-        var ss = [].concat( str.match( /imports((a-z|A-Z|"|.)*);/g ) );
-        // 得到当前脚本的所有引用的脚本
+    //   /imports((a-z|A-Z|"|.)*);/g
 
-        function load( index ) {
-            if ( ss[index] ) {
-                loadScript( getBetween( ss[index], "\"", "\"" ), function ( script ) {
-                    filterImports( script.text );
-                    load( ++index )
+    function reverseArray( array, func ) {
+        // 反转数组
+        var a = [];
+        for ( var i = array.length - 1; i >= 0; i-- ) {
+            a.push( func( array[i] ) );
+        }
+        return a;
+    }
+
+    function getScript( str ) {
+        var ss = str.match( /imports((a-z|A-Z|"|.)*);/g );
+        if ( ss ) {
+            scripts = scripts.concat( reverseArray( ss, function ( item ) {
+                return getBetween( item, "\"", "\"" );
+            } ) );
+        }
+    }
+
+    function parse( str ) {
+        getScript( str );
+        function doit() {
+            var s = scripts.pop();
+            if ( s ) {
+                loadScript( s, function () {
+                    doit();
                 } );
             }
         }
 
-        load( 0 );
+        doit();
+
     }
 
     function main( func ) {
-        filterImports( func.toString() );
+        parse( func.toString() );
     }
 
     function Package( func ) {
-        filterImports( func.toString() );
+        getScript( func.toString() );
     }
 
-    var imports = function () {
+    function imports() {
 
-    };
+    }
 
     window.main = main;
     window.Package = Package;

@@ -4,5 +4,5 @@
 console.log( "2-lib.js" );
 
 Package( function () {
-    imports( "3-lib.js" );
+    imports( "lib/3-lib.js" );
 } );
