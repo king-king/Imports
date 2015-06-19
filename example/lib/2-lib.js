@@ -5,4 +5,5 @@ console.log( "download 2-lib" );
 
 Package( function () {
     imports( "lib/3-lib.js" );
+    console.log( "execute 2-lib" );
 } );
