@@ -5,7 +5,9 @@
 
 
     var scripts = [];
-
+    var map = {};
+    var curScriptContent;
+    var start;
 
     function loadScript( src, done ) {
         var script = document.createElement( "script" );
@@ -22,8 +24,6 @@
         str = str.replace( "\"", "%" );
         return str.substring( s, str.indexOf( end ) );
     }
-
-    //   /imports((a-z|A-Z|"|.)*);/g
 
     function reverseArray( array, func ) {
         // 反转数组
@@ -49,8 +49,13 @@
             var s = scripts.pop();
             if ( s ) {
                 loadScript( s, function () {
+                    map[s] = curScriptContent;
                     doit();
                 } );
+            }
+            else {
+                // 全都下载完毕,从main开始执行
+                execute( start );
             }
         }
 
@@ -58,16 +63,25 @@
 
     }
 
+    function execute( func ) {
+        func();
+    }
+
     function main( func ) {
         parse( func.toString() );
+        start = func;
     }
 
     function Package( func ) {
-        getScript( func.toString() );
+        var content = func.toString();
+        getScript( content );
+        curScriptContent = func;
     }
 
-    function imports() {
-
+    function imports( src ) {
+        if ( map[src] ) {
+            map[src]();
+        }
     }
 
     window.main = main;
