@@ -137,7 +137,6 @@
         curScriptContent = func;
     }
 
-
     function imports( src ) {
         curPath = resolve( scripts[scripts.length - 1], src );
         scripts.push( curPath );
@@ -152,5 +151,4 @@
     window.main = main;
     window.Package = Package;
     window.imports = imports;
-
 })();
