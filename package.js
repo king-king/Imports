@@ -7,6 +7,7 @@
     var curScriptContent;
     var start;
     var curPath;// 记录当前路径，处理路径问题
+    var startPath;
 
     function loadScript( src, done ) {
         var script = document.createElement( "script" );
@@ -55,6 +56,8 @@
             }
             else {
                 // 全都下载完毕,从main开始执行
+                curPath = startPath;
+                scripts = [curPath];
                 run( start );
             }
         }
@@ -110,11 +113,6 @@
         }
     }
 
-    function brother( base ) {
-        var block = base.split( "/" );
-        return block.slice( 0, -1 ).join( "/" );
-    }
-
     function main( func ) {
         // 处理路径问题
         var ss = document.querySelectorAll( "script" );
@@ -127,6 +125,7 @@
             //  包含main函数的脚本来说的
             curPath = ss[ss.length - 1].src;
         }
+        startPath = curPath;
         parse( func.toString() );
         start = func;
     }
@@ -138,9 +137,12 @@
     }
 
     function imports( src ) {
-        if ( map[src] ) {
-            map[src]();
+        curPath = resolve( scripts[scripts.length - 1], src );
+        scripts.push( curPath );
+        if ( map[curPath] ) {
+            map[curPath]();
         }
+        scripts.pop();
     }
 
     window.main = main;
