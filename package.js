@@ -115,8 +115,9 @@
 
     function main( func ) {
         // 处理路径问题
-        var ss = document.querySelectorAll( "script" );
-        if ( ss[ss.length - 1].innerHTML.match( /main/g ).length == 2 ) {
+        var ss = document.querySelectorAll( "script" ),
+            inner = ss[ss.length - 1].innerHTML;
+        if ( inner && inner.match( /main/g ).length == 2 ) {
             //  说明main函数是内嵌在script标签中的
             curPath = "";
         }
