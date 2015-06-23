@@ -136,13 +136,16 @@
         curScriptContent = func;
     }
 
+
     function imports( src ) {
         curPath = resolve( scripts[scripts.length - 1], src );
         scripts.push( curPath );
         if ( map[curPath] ) {
-            map[curPath]();
+            var exports = {};
+            map[curPath]( exports );
         }
         scripts.pop();
+        return exports;
     }
 
     window.main = main;

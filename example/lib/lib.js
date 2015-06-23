@@ -5,6 +5,7 @@
 //console.log( "download lib" );
 
 Package( function () {
-    imports( "layout/custom.js" );
+    var custorm = imports( "layout/custom.js" );
     console.log( "execute lib" );
+    console.log( custorm );
 } );
