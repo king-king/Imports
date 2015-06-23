@@ -78,7 +78,7 @@
         var block = path.split( "/" );
         if ( block.length == 1 ) {
             // path单纯是个文件名
-            return brother( base ) + "/" + block[0];
+            return base + "/" + block[0];
         }
         else {
             for ( var i = 0; i < block.length; i++ ) {
