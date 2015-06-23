@@ -45,12 +45,12 @@
 
     function parse( str ) {
         getScript( str );
-        function doit() {
+        function justDoIt() {
             var s = scripts.pop();
             if ( s ) {
                 loadScript( s, function () {
                     map[s] = curScriptContent;
-                    doit();
+                    justDoIt();
                 } );
             }
             else {
@@ -59,7 +59,7 @@
             }
         }
 
-        doit();
+        justDoIt();
     }
 
     function run( func ) {
