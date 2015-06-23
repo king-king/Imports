@@ -5,6 +5,6 @@
 console.log( "download person" );
 
 Package( function () {
-    imports( "lib/2-lib-2.js" );
-    console.log( "execute person" );
+    imports( "2-lib-2.js" );
+    //console.log( "execute person" );
 } );

@@ -5,6 +5,6 @@
 console.log( "download name" );
 
 Package( function () {
-    imports( "lib/2-lib.js" );
-    console.log( "execute name" );
+    imports( "2-lib.js" );
+    //console.log( "execute name" );
 } );
