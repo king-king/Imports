@@ -67,8 +67,17 @@
     }
 
     function resolve( base, path ) {
+        function clearFileName( path ) {
+            if ( path.indexOf( "." ) != -1 ) {
+                path = path.split( "/" ).slice( 0, -1 ).join( "/" );
+            }
+            return path;
+        }
+
+        base = clearFileName( base );
         var block = path.split( "/" );
         if ( block.length == 1 ) {
+            // path单纯是个文件名
             return brother( base ) + "/" + block[0];
         }
         else {
@@ -93,7 +102,7 @@
     function back( path ) {
         var block = path.split( "/" );
         if ( block.length > 2 ) {
-            block = block.slice( 0, -2 );
+            block = block.slice( 0, -1 );
             return block.join( "/" );
         }
         else {
