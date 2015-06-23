@@ -3,8 +3,6 @@
  */
 //console.log( "download custom" );
 Package( function ( exports ) {
-    console.log( "execute custom" );
-
     function say() {
         console.log( "hello" )
     }
