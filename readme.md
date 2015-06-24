@@ -10,7 +10,7 @@ by [wangqun](http://weibo.com/u/2003234792)
 ### main
 每个项目都需要有一个main函数，表示执行的入口，可以写在script中，也可以用script的src引用。
 写在script中：
-```
+```js
 <script>
     main(function(){
         /* 
@@ -35,7 +35,7 @@ main(function(){
 ###　Package
 
 自己编写的模块需要用关键字<strong>Package</strong>包装起来，如果需要导出接口，还要给函数传递一个参数，一般命名为exports，但也<strong>可以自选</strong>(这一点和某些库不一样)，该用法如下
-```
+```js
 // 在main.js中引用util.js，路径按照util.js相对于main.js的路径
 >>>>main.js
 
@@ -54,7 +54,7 @@ Package(function(exports){
     exports.say=say;// 注意exports名字本身没有要求，可以随意起，只要和上面传进来的匹配即可
 });
 
-//如果一个模块包只导出一个接口，则可以用module.exports
+// 如果一个模块包只导出一个接口，则可以用module.exports
 >>>>util2.js
 
 Package(function(exports,module){
