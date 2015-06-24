@@ -1,5 +1,5 @@
 
-# javascript包管理系统
+# 浏览器端javascript包管理系统
 
                 by wangqun
                 
