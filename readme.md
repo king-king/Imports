@@ -70,13 +70,14 @@ Package(function(exports,module){
 ## 文件合并用法
 如果模块过多，不利于http优化，Imports提供文件合并的方法，需要安装
 [nodejs](https://nodejs.org/)
-，然后调用merge.js,merge的用法很简单，有两个参数，一个是包含main函数的脚本src，另一个输出文件路径。
+，然后调用merge.js。
+merge的用法很简单，有两个参数，一个是包含main函数的脚本src，另一个输出文件路径。
 例如在example文件夹中的doMerge.js中是这样调用的：
 ```js
 var merge = require( "../merge.js" );
 merge( "main.js", "../out/main.min.js" );
 ```
-**需要注意，如果想用Imports提供的合并功能，则main函数需要独立提取出来放在一个脚本中，不能发在script标签中间**
+**需要注意，如果想用Imports提供的合并功能，则main函数需要独立提取出来放在一个js脚本文件中，不能放在script标签中间**
 
 ## 说明
 
