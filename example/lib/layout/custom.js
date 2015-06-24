@@ -2,8 +2,11 @@
  * Created by WQ on 2015/6/23.
  */
 Package( function ( exports ) {
+    var gn = imports( "getName.js" );
+
     function say() {
-        console.log( "hello" )
+        var name = gn.getName();
+        alert( name )
     }
 
     function see() {
