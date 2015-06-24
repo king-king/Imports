@@ -20,10 +20,10 @@ by [wangqun](http://weibo.com/u/2003234792)
 </script>
 ```
 或者是引用一个外部的脚本，<strong>假设</strong>该脚本名字是main.js
-```
+```js
 <script src="main.js"></script>
 
->>>>main.js
+// >>>>main.js
 
 main(function(){
     /* 
@@ -37,14 +37,14 @@ main(function(){
 自己编写的模块需要用关键字<strong>Package</strong>包装起来，如果需要导出接口，还要给函数传递一个参数，一般命名为exports，但也<strong>可以自选</strong>(这一点和某些库不一样)，该用法如下
 ```js
 // 在main.js中引用util.js，路径按照util.js相对于main.js的路径
->>>>main.js
+// >>>>main.js
 
 main(function(){
     var util=imports("util");
     util.say();
 });
 
->>>>util.js
+// >>>>util.js
 
 Package(function(exports){
     function say(){
@@ -55,7 +55,7 @@ Package(function(exports){
 });
 
 // 如果一个模块包只导出一个接口，则可以用module.exports
->>>>util2.js
+// >>>>util2.js
 
 Package(function(exports,module){
     function say(){
