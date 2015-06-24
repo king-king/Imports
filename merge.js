@@ -66,18 +66,11 @@ function serialTask( tasks, callback ) {
 
 var fs = require( "fs" );
 
-function getFileName( path ) {
-    var blocks = path.split( "/" );
-    return blocks[blocks.length - 1];
-}
-
 function merge( path, outputPath ) {
     var scripts = [];
     var map = {};
     var curPath = path;
     // 添加min标记
-    //var writeFileName = getFileName( path ).split( "." );
-    //writeFileName = writeFileName[0] + ".min.js";
     function readFile( path, callback ) {
         fs.readFile( path, function ( err, data ) {
             if ( err ) {
@@ -126,12 +119,10 @@ function merge( path, outputPath ) {
                 } );
             }
             else {
-                console.log( "end" );
-                var content = "var a={";
+                var content = "var map={";
 
                 function Package( func ) {
-                    // 在下面的eval()中会调用这个函数
-                    console.log( "ok" );
+                    // 在下面的eval()中会调用这个函数，不能删掉
                     content = content + func.toString() + ","
                 }
 
@@ -139,12 +130,96 @@ function merge( path, outputPath ) {
                     content = content + "\"" + key + "\":";
                     eval( map[key].toString() );
                 }
-                content = content + "}";
-                fs.writeFile( outputPath, content, function ( err ) {
-                    if ( err ) {
-                        console.log( err );
-                    }
-                } );
+                content = content + "};";
+
+                // 将驱动代码和main中的代码放到content中，结束之后写到outputPath中。注意二者的顺序
+                serialTask(
+                    [
+                        function ( done ) {
+                            var driver = function () {
+                                window.main = function ( func ) {
+                                    func();
+                                };
+
+                                function resolve( base, path ) {
+                                    function clearFileName( path ) {
+                                        if ( path.indexOf( "." ) != -1 ) {
+                                            path = path.split( "/" ).slice( 0, -1 ).join( "/" );
+                                        }
+                                        return path;
+                                    }
+
+                                    base = clearFileName( base );
+                                    var block = path.split( "/" );
+                                    if ( block.length == 1 ) {
+                                        // path单纯是个文件名
+                                        return base + "/" + block[0];
+                                    }
+                                    else {
+                                        for ( var i = 0; i < block.length; i++ ) {
+                                            if ( block[i] == ".." ) {
+                                                // 回退
+                                                base = back( base );
+                                            }
+                                            else {
+                                                if ( base == "" ) {
+                                                    base = block[i];
+                                                }
+                                                else {
+                                                    base = base + "/" + block[i];
+                                                }
+                                            }
+                                        }
+                                        return base;
+                                    }
+                                }
+
+                                function back( path ) {
+                                    var block = path.split( "/" );
+                                    if ( block.length > 2 ) {
+                                        block = block.slice( 0, -1 );
+                                        return block.join( "/" );
+                                    }
+                                    else {
+                                        return "";
+                                    }
+                                }
+
+                                curPath = "main.js";
+                                var scripts = [curPath];
+
+                                window.imports = function ( src ) {
+                                    curPath = resolve( scripts[scripts.length - 1], src );
+                                    scripts.push( curPath );
+                                    if ( map[curPath] ) {
+                                        var exports = {};
+                                        var module = {exports : null};
+                                        map[curPath]( exports, module );
+                                    }
+                                    scripts.pop();
+                                    return module.exports ? module.exports : exports;
+                                }
+                            };
+                            content = content + "(" + driver.toString() + ")();";
+                            done();
+                            // 写驱动代码
+                        },
+                        function ( done ) {
+                            // 写main文件
+                            readFile( path, function ( data ) {
+                                content = content + data.toString();
+                                done();
+                            } );
+                        }
+                    ], function () {
+                        console.log( "ok" );
+                        // 全都处理完成，写入
+                        fs.writeFile( outputPath, content, function ( err ) {
+                            if ( err ) {
+                                console.log( err );
+                            }
+                        } );
+                    } );
             }
         }
 
@@ -160,16 +235,4 @@ function merge( path, outputPath ) {
 }
 
 module.exports = merge;
-
-
-
-
-
-
-
-
-
-
-
-
 
