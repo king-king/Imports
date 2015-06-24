@@ -57,7 +57,7 @@
             else {
                 // 全都下载完毕,从main开始执行
                 curPath = startPath;
-                scripts = [curPath];
+                scripts = [curPath];// scripts有多重含义，下载和执行的时候都会保存一些路径
                 run( start );
             }
         }
