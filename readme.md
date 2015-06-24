@@ -48,7 +48,7 @@ main(function(){
 
 Package(function(exports){
     function say(){
-        console.log("hello word);
+        console.log("hello word");
     }
 
     // 注意exports名字本身没有要求，可以随意起，只要和上面传进来的匹配即可
@@ -60,7 +60,7 @@ Package(function(exports){
 
 Package(function(exports,module){
     function say(){
-        console.log("hello word);
+        console.log("hello word");
     }
     
     module.exports.say=say;
