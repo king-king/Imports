@@ -51,7 +51,7 @@ Package(function(exports){
         console.log("hello word);
     }
 
-// 注意exports名字本身没有要求，可以随意起，只要和上面传进来的匹配即可
+    // 注意exports名字本身没有要求，可以随意起，只要和上面传进来的匹配即可
     exports.say=say;
 });
 
