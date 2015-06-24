@@ -54,6 +54,17 @@ Package(function(exports){
     exports.say=say;// 注意exports名字本身没有要求，可以随意起，只要和上面传进来的匹配即可
 });
 
+//如果一个模块包只导出一个接口，则可以用module.exports
+>>>>util2.js
+
+Package(function(exports,module){
+    function say(){
+        console.log("hello word);
+    }
+    
+    module.exports.say=say;
+});
+
 ```
 
 ## 说明
