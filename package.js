@@ -142,10 +142,11 @@
         scripts.push( curPath );
         if ( map[curPath] ) {
             var exports = {};
-            map[curPath]( exports );
+            var module = {exports : null};
+            map[curPath]( exports, module );
         }
         scripts.pop();
-        return exports;
+        return module.exports ? module.exports : exports;
     }
 
     window.main = main;
