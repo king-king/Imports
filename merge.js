@@ -127,8 +127,20 @@ function merge( path, outputPath ) {
             }
             else {
                 console.log( "end" );
-                console.log( JSON.stringify( map ) );
-                fs.writeFile( outputPath, JSON.stringify( map ), function ( err ) {
+                var content = "var a={";
+
+                function Package( func ) {
+                    // 在下面的eval()中会调用这个函数
+                    console.log( "ok" );
+                    content = content + func.toString() + ","
+                }
+
+                for ( var key in map ) {
+                    content = content + "\"" + key + "\":";
+                    eval( map[key].toString() );
+                }
+                content = content + "}";
+                fs.writeFile( outputPath, content, function ( err ) {
                     if ( err ) {
                         console.log( err );
                     }
