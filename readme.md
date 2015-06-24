@@ -1,7 +1,7 @@
 
 # 浏览器端javascript包管理系统
 
-                by <a href="http://weibo.com/u/2003234792">wangqun</a>
+                by [wangqun](http://weibo.com/u/2003234792)
                 
 该系统的目的是为了实现js的包管理,实际使用时候只要引用package.js即可，<strong>不需要配置</strong>，使用极为方便
 
