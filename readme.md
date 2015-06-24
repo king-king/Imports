@@ -1,11 +1,11 @@
 
 # 浏览器端javascript包管理系统
 
-                by wangqun
+                by <a href="http://weibo.com/u/2003234792">wangqun</a>
                 
 该系统的目的是为了实现js的包管理,实际使用时候只要引用package.js即可，<strong>不需要配置</strong>，使用极为方便
 
-用法：
+##用法：
 
 ### main
 每个项目都需要有一个main函数，表示执行的入口，可以写在script中，也可以用script引用。
@@ -48,9 +48,10 @@ Package(function(exports){
         console.log("hello word);
     }
     
-    exports.say=say;
+    exports.say=say;// 注意exports名字本身没有要求，可以随意起，只要和上面传进来的匹配即可
 });
 
 ```
 
+##
 
