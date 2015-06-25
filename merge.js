@@ -185,7 +185,7 @@ function merge( path, outputPath ) {
                                     }
                                 }
 
-                                curPath = "main.js";
+                                curPath = "$in_path";
                                 var scripts = [curPath];
 
                                 window.imports = function ( src ) {
@@ -200,7 +200,7 @@ function merge( path, outputPath ) {
                                     return module.exports ? module.exports : exports;
                                 }
                             };
-                            content = content + "(" + driver.toString() + ")();";
+                            content = content + "(" + driver.toString().replace( "$in_path", path ) + ")();";
                             done();
                             // 写驱动代码
                         },
