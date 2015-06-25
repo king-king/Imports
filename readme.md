@@ -87,4 +87,5 @@ merge( "main.js", "../out/main.min.js" );
     * script标签支持onload事件。
     * script标签先执行里面的代码，然后触发onload事件。
 * merge.js只提供合并的接口，不能直接执行，如果需要写能够执行的node代码，方法详见example文件夹中的doMerge.js。
+* Imports系统中有两个全局变量：main和imports，尽量不要覆盖、修改这两个变量，否则可能会产生错误。
 
