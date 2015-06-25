@@ -22,6 +22,10 @@ function resolve( base, path ) {
     }
     else {
         for ( var i = 0; i < block.length; i++ ) {
+            if ( base == "" ) {
+                // 如果已经干净了，则直接拼接
+                return block.slice( i, block.length ).join( "/" );
+            }
             if ( block[i] == ".." ) {
                 // 回退
                 base = back( base );
@@ -155,6 +159,10 @@ function merge( path, outputPath ) {
                                     }
                                     else {
                                         for ( var i = 0; i < block.length; i++ ) {
+                                            if ( base == "" ) {
+                                                // 如果已经干净了，则直接拼接
+                                                return block.slice( i, block.length ).join( "/" );
+                                            }
                                             if ( block[i] == ".." ) {
                                                 // 回退
                                                 base = back( base );
