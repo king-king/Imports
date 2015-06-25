@@ -84,7 +84,7 @@ merge( "main.js", "../out/main.min.js" );
 
 * Package.js会对脚本引用做分析，会按照顺序进行下载脚本。
 * 到目前为止并没有在低版本浏览器上进行测试，该系统和浏览器相关的关键点有两个：
-    * script标签支持onload事件
-    * script标签先执行里面的代码，然后触发onload事件
-* merge.js只提供合并的接口，不能直接执行，如果需要写能够执行的node代码，方法详见example文件夹中的doMerge.js
+    * script标签支持onload事件。
+    * script标签先执行里面的代码，然后触发onload事件。
+* merge.js只提供合并的接口，不能直接执行，如果需要写能够执行的node代码，方法详见example文件夹中的doMerge.js。
 
