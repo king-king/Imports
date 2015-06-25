@@ -12,6 +12,9 @@ function resolve( base, path ) {
     }
 
     base = clearFileName( base );
+    if ( base == "" ) {
+        return path;
+    }
     var block = path.split( "/" );
     if ( block.length == 1 ) {
         // path单纯是个文件名
@@ -142,6 +145,9 @@ function merge( path, outputPath ) {
                                     }
 
                                     base = clearFileName( base );
+                                    if ( base == "" ) {
+                                        return path;
+                                    }
                                     var block = path.split( "/" );
                                     if ( block.length == 1 ) {
                                         // path单纯是个文件名
