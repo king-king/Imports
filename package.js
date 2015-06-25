@@ -78,6 +78,9 @@
         }
 
         base = clearFileName( base );
+        if ( base == "" ) {
+            return path;
+        }
         var block = path.split( "/" );
         if ( block.length == 1 ) {
             // path单纯是个文件名
@@ -104,7 +107,7 @@
 
     function back( path ) {
         var block = path.split( "/" );
-        if ( block.length > 2 ) {
+        if ( block.length >= 2 ) {
             block = block.slice( 0, -1 );
             return block.join( "/" );
         }
@@ -117,7 +120,7 @@
         // 处理路径问题
         var ss = document.querySelectorAll( "script" ),
             inner = ss[ss.length - 1].innerHTML;
-        if ( inner && inner.match( /main/g ).length == 2 ) {
+        if ( inner && inner.match( /main/g ).length != 0 ) {
             //  说明main函数是内嵌在script标签中的
             curPath = "";
         }

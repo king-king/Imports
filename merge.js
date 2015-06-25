@@ -38,21 +38,13 @@ function resolve( base, path ) {
 
 function back( path ) {
     var block = path.split( "/" );
-    if ( block.length > 2 ) {
+    if ( block.length >= 2 ) {
         block = block.slice( 0, -1 );
         return block.join( "/" );
     }
     else {
         return "";
     }
-}
-
-function map( array, func ) {
-    var mapArray = [];
-    array.forEach( function ( item, i ) {
-        mapArray.push( func( item, i ) );
-    } );
-    return mapArray;
 }
 
 // 顺序执行
@@ -176,7 +168,7 @@ function merge( path, outputPath ) {
 
                                 function back( path ) {
                                     var block = path.split( "/" );
-                                    if ( block.length > 2 ) {
+                                    if ( block.length >= 2 ) {
                                         block = block.slice( 0, -1 );
                                         return block.join( "/" );
                                     }
