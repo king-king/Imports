@@ -70,7 +70,7 @@ Package(function(exports,module){
 
 ## 文件合并用法
 如果模块过多，不利于http优化，Imports提供文件合并的方法，需要安装
-[nodejs](https://nodejs.org/)
+[Node.js](https://nodejs.org/)
 ，然后调用merge.js。
 merge的用法很简单，有两个参数，一个是包含main函数的脚本src，另一个输出文件路径。
 例如在example文件夹中的doMerge.js中是这样调用的：
