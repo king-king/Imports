@@ -14,6 +14,12 @@
         script.src = src;
         curPath = src;
         document.getElementsByTagName( "head" )[0].appendChild( script );
+        script.onreadystatechange = function () {
+            if ( script.readyState == "loaded" ) {
+                done();
+                script.onreadystatechange = null;
+            }
+        };
         script.onload = function () {
             done();
             script.onload = null;
