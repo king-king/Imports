@@ -13,7 +13,7 @@
         var script = document.createElement( "script" );
         script.src = src;
         curPath = src;
-        document.head.appendChild( script );
+        document.getElementsByTagName( "head" )[0].appendChild( script );
         script.onload = function () {
             done();
             script.onload = null;
@@ -122,7 +122,7 @@
 
     function main( func ) {
         // 处理路径问题
-        var ss = document.querySelectorAll( "script" ),
+        var ss = document.getElementsByTagName( "script" ),
             inner = ss[ss.length - 1].innerHTML;
         if ( inner && inner.match( /main/g ).length != 0 ) {
             //  说明main函数是内嵌在script标签中的
