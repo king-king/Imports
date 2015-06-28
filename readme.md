@@ -84,7 +84,7 @@ merge( "main.js", "../out/main.min.js" );
 
 * package.js会对脚本引用做分析，会按照顺序进行下载脚本。
 * merge.js是一个node.js脚本，其中提供一个merge接口，供调用者合并模块文件用。
-* package.js可能存在兼容性问题，只是在ie模拟器上测试过，但是没有在实际的ie5+浏览器上测试。
+* package.js因为要在浏览器端运行，所以可能存在兼容性问题。目前在ie模拟器上测试结果是兼容ie5+，但是没有在实际对应版本上进行过测试。
 * merge.js只提供合并的接口，不能直接执行，如果需要写能够执行的node代码，方法详见example文件夹中的doMerge.js。
 * Imports系统中有两个全局变量：main和imports，尽量不要覆盖、修改这两个变量，否则可能会产生错误。
 
