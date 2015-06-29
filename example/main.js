@@ -3,7 +3,6 @@
  */
 
 main( function () {
-    var custom = imports( "lib/layout/custom.js" );
-
-    custom.say();
+    imports( "lib/layout/custom.js" );
+    imports( "lib/layout/getName.js" );
 } );

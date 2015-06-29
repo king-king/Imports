@@ -1,19 +1,18 @@
 /**
  * Created by WQ on 2015/6/23.
  */
-Package( function ( exports ) {
-	var gn = imports( "getName.js" );
+Package( function () {
+    var loopArray = imports( "util.js" ).loopArray;
+    var img = [
+        "img/1.jpg",
+        "img/2.jpg",
+        "img/3.jpg"
+    ];
 
-	function say() {
-		var name = gn.getName();
-		console.log( name )
-	}
-
-	function see() {
-		console.log( "i see" )
-	}
-
-	exports.say = say;
-	exports.see = see;
+    loopArray( img, function ( src ) {
+        var image = new Image();
+        image.src = src;
+        document.body.appendChild( image );
+    } );
 
 } );

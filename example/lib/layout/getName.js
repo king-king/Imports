@@ -1,10 +1,17 @@
 /**
  * Created by WQ on 2015/6/24.
  */
-Package( function ( exports ) {
-    function getName() {
-        return "king-king";
-    }
+Package( function () {
+    var loopArray = imports( "util.js" ).loopArray;
+    var img = [
+        "img/1.jpg",
+        "img/2.jpg",
+        "img/3.jpg"
+    ];
 
-    exports.getName = getName;
+    loopArray( img, function ( src ) {
+        var div = document.createElement( "div" );
+        div.innerHTML = src;
+        document.body.appendChild( div );
+    } );
 } );
