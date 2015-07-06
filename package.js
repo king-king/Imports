@@ -146,8 +146,8 @@
             curPath = ss[ss.length - 1].src;
         }
         startPath = curPath;
-        parse( func.toString() );
         start = func;
+        parse( func.toString() );
     }
 
     function Package( func ) {
