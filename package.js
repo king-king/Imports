@@ -2,12 +2,12 @@
  * Created by WQ on 2015/6/18.
  */
 (function () {
-    var scripts = [];
-    var map = {};
-    var curScriptContent;
-    var start;
-    var curPath;// 记录当前路径，处理路径问题
-    var startPath;
+    var scripts = [],
+        map = {},
+        curScriptContent,
+        start,
+        curPath,// 记录当前路径，处理路径问题
+        startPath;
 
     function loadScript( src, done ) {
         var script = document.createElement( "script" );
@@ -56,15 +56,10 @@
         function justDoIt() {
             var s = scripts.pop();
             if ( s ) {
-                if ( !map[s] ) {
-                    loadScript( s, function () {
-                        map[s] = curScriptContent;
-                        justDoIt();
-                    } );
-                }
-                else {
+                !map[s] ? loadScript( s, function () {
+                    map[s] = curScriptContent;
                     justDoIt();
-                }
+                } ) : justDoIt();
             }
             else {
                 // 全都下载完毕,从main开始执行
